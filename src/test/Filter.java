@@ -18,7 +18,7 @@ public class Filter {
 	}
 	public int getCoffeeAmount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return amountOfCofee;
 	}
 
 }

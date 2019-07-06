@@ -1,6 +1,7 @@
 package test;
 
 public class PlateSensor extends Sensor{
+	
 	PlateSensor(Pot pot){
 		super(pot);
 	}

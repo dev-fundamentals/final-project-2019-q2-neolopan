@@ -10,11 +10,12 @@ public class CoffeeMakerTest {
 		CoffeeMaker maker=new CoffeeMaker();
 		maker.fillFilter(coffee);
 		maker.pourWater(1);
-		maker.amIAbleToMakeCoffee();
+		boolean actual= maker.amIAbleToMakeCoffee();
 		boolean expected = true;
 		
 		
-		assertEquals(expected, false);
+		assertEquals(expected, actual);
 	}
+	
 
 }

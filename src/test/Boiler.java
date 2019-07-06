@@ -36,7 +36,7 @@ public class Boiler extends Container {
 		}
 	}
 
-	public boolean isValveClosed() {
+	public boolean isValveOpened() {
 
 		return valve.isOpen();
 	}

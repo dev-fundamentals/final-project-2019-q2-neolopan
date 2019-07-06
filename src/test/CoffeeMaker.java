@@ -10,13 +10,17 @@ public class CoffeeMaker {
 	PlateSensor plateSensor;
 	PlateHeater plateHeater;
 	
+	
 	CoffeeMaker()
 	{
 		 boiler=new Boiler();
 		 filter= new Filter();
 		 receptacle=new Receptacle();
-		 
 		 pot = new Pot();
+		 light = new IndicatorLight();
+		 plateSensor = new PlateSensor(pot);
+		 plateHeater = new PlateHeater();
+		
 	}
 	public void fillFilter(Coffee coffee) {
 		// TODO Auto-generated method stub
@@ -31,12 +35,11 @@ public class CoffeeMaker {
 		
 		boiler.fillWater(i);
 	}
-	public void brew(int i) throws Exception {
+	public void brew(int i) throws InterruptedException{
 		// TODO Auto-generated method stub
 		int cupsMade=0;
-		//while (amIAbleToMakeCoffee() && cupsMade<i) {
-		while ( cupsMade<i) {
-			light.turnOn();
+		light.turnOn();
+		while (amIAbleToMakeCoffee() && cupsMade<i) {
 			cupsMade++;
 			System.out.println("Preparing a cup of cofee...");
 			Thread.sleep(1000);
@@ -46,39 +49,45 @@ public class CoffeeMaker {
 	}
 	
 	public void removePot() {
-		// TODO Auto-generated method stub
+		pot.PotIsRemoved();
+		System.out.println("Pot has been removed... ");
 		
 	}
-	public void amIAbleToMakeCoffee() {
+	public void putPot() {
+		pot.PotIsAllocated();
+		System.out.println("Pot has been allocated... ");
+		
+	}
+	public boolean amIAbleToMakeCoffee() {
 		
 			//pot is here...sensor will tell me
 			if (plateSensor.isPotpresent()) {
-				System.out.println("1");
+			
 				//boiler has water...boiler knows
 				if (boiler.getState()==BoilerState.notEmpty) {
-					System.out.println("2");
+					
 					//valve is closed...boiler knows
-					if (boiler.isValveClosed()) {
-						System.out.println("3");
-			//filter has coffee...filter knows
+					if (!boiler.isValveOpened()) {
+						
+						//filter has coffee...filter knows
 						if (filter.getCoffeeAmount()>0) {
-							System.out.println("4");
-							//return true;
+							
+							return true;
 						}
 						else
-							System.out.println("No coffee in the filter");
+							System.out.println("Sorry, there is no coffee in the filter");
 					}
 					else
-						System.out.println("Valve is open, please close it");
+						System.out.println("Sorry, the valve is open, please close it");
 				}
 				else
-					System.out.println("Boiler is empty");
+					System.out.println("Sorry, the Boiler is empty. Please fill water.");
 			}
 		
 		else {
-			System.out.println("Pot is not present");
+			System.out.println("Sorry, the Pot is not present. Please allocate it");
 		}
-		//return false;
+		return false;
 		}
 		
 		

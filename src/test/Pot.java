@@ -6,4 +6,13 @@ public class Pot extends Container {
 		currentQty=0;
 		setState(PotState.empty);
 	}
+	
+	void PotIsRemoved()
+	{
+		setState(PotState.warmerEmpty);
+	}
+	void PotIsAllocated()
+	{
+		setState(PotState.empty);
+	}
 }

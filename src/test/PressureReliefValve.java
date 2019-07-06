@@ -10,8 +10,13 @@ public class PressureReliefValve {
 		
 		return (status == ValveState.opened);
 	}
+	
 	void openValve() {
 		status=ValveState.opened;
 	}
+	void closeValve() {
+		status=ValveState.closed;
+	}
+
 
 }
